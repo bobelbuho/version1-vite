@@ -16,10 +16,11 @@ const SignupFom = () => {
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
     defaultValues: {
-      name: '',
-      username: "",
+      firstname: '',
+      name: "",
       email: '',
       password: '',
+      passwordConfirm:'',
     },
   })
 
@@ -34,29 +35,83 @@ const SignupFom = () => {
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
         <img src="assets/images/logo.svg" alt="logo"></img>
-      </div>
+
+        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Faisons connaissance</h2>
+        <p className="text-dark-3 small-medium md:base-regular mt-2">Créez votre compte pour pouvoir publier et reserver des trajets</p>
+      
 
 
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} 
+      className=" flex flex-col gap-5 w-full mt-4">
         <FormField
           control={form.control}
-          name="username"
+          name="firstname"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Prénom</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input type="text" className="shad-input" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+         <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nom</FormLabel>
+              <FormControl>
+                <Input type="text" className="shad-input" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+           <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input type="email" className="shad-input" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+           <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Mot de passe</FormLabel>
+              <FormControl>
+                <Input type="password" className="shad-input" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirmez votre Mot de passe</FormLabel>
+              <FormControl>
+                <Input type="password" className="shad-input" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button type="submit">Submit</Button>
       </form>
+      </div>
     </Form>
   )
 }
