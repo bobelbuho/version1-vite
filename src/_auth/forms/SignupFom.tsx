@@ -8,12 +8,13 @@ import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation"
 import { z } from "zod"
 import Loader from "@/components/ui/shared/Loader"
+import { Link } from "react-router-dom"
 
 
 
 
 const SignupFom = () => {
-  const isLoading = true;
+  const isLoading = false;
 
 
   // 1. Define your form.
@@ -30,8 +31,7 @@ const SignupFom = () => {
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof SignupValidation>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    // const newUser = await createUserAccount(values);
     console.log(values)
   }
 
@@ -120,6 +120,13 @@ const SignupFom = () => {
               </div>
             ): "Sign up "}
           </Button>
+
+          <p className="text-small-regular text-dark-2 text-center mt-2">
+            J'ai déjà un compte ?  
+            <Link to='/sign-in' className="text-primary-500 text-small-semibold ml-1">
+              Connexion
+              </Link>
+          </p>
         </form>
       </div>
     </Form>
