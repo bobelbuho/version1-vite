@@ -37,7 +37,7 @@ const SignupFom = () => {
 
   return (
     <Form {...form}>
-      <div className="sm:w-420 flex-center flex-col">
+      <div className="sm:w-420 flex-center flex-col mt-10">
         <img src="assets/images/logo.svg" alt="logo"></img>
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Faisons connaissance</h2>
