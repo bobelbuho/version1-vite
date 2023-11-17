@@ -9,7 +9,9 @@ export async function createUserAccount(user: INewUser){
             ID.unique(),
             user.email,
             user.password,
-            user.name
+            user.passwordConfirm,
+            user.name,
+            user.firstname,
         )
 
         return newAccount;
