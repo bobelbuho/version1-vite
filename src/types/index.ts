@@ -42,9 +42,9 @@ export type IUser = {
 
 export type INewUser = {
   name: string;
-  username: string;
+  //username: string;
   email: string;
   password: string;
-  passwordConfirm: string;
-  firstname: string,
+  //passwordConfirm: string;
+  //firstname: string,
 };
