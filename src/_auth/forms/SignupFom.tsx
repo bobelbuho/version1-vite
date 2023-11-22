@@ -8,19 +8,22 @@ import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation"
 import { z } from "zod"
 import Loader from "@/components/ui/shared/Loader"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
 import { useCreateUserAccountMutation } from "@/lib/api/auth/useCreateUserAccountMutation"
 import { useSignInAccount } from "@/lib/react-query/queriesAndMutations"
+import { useUserContext } from "@/context/AuthContext"
 
 
 
 
 const SignupFom = () => {
   const { toast } = useToast();
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+  const navigate = useNavigate();
   
 
-const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
+const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
  useCreateUserAccountMutation();
 
  const { mutateAsync: signInAccount, isLoading: isSigningIn } =
@@ -49,7 +52,15 @@ const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
     password: values.password,
   });
   if(!session){
-    return toast({title: "Connexion échouée, veuiller réessayer",})
+    return toast({title: "Connexion échoué. Veuillez réessayer",})
+  }
+  const isLoggedIn = await checkAuthUser();
+  if(!isLoggedIn){
+    form.reset();
+
+    navigate('/');
+  } else {
+    return toast({title: "Connexion échoué. Veuillez réessayer",})
   }
 }
 
