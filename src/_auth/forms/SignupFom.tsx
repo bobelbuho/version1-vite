@@ -10,7 +10,8 @@ import { z } from "zod"
 import Loader from "@/components/ui/shared/Loader"
 import { Link } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
-import { userCreateUserAccount } from "@/lib/react-query/queriesAndMutations"
+import { useCreateUserAccountMutation } from "@/lib/api/auth/useCreateUserAccountMutation"
+import { useSignInAccount } from "@/lib/react-query/queriesAndMutations"
 
 
 
@@ -19,7 +20,11 @@ const SignupFom = () => {
   const { toast } = useToast();
   
 
-const { mutateAsync: createUserAccount, isLoading: isCreatingUser } = userCreateUserAccountMutation();
+const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
+ useCreateUserAccountMutation();
+
+ const { mutateAsync: signInAccount, isLoading: isSigningIn } =
+ useSignInAccount(); 
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
@@ -39,8 +44,14 @@ const { mutateAsync: createUserAccount, isLoading: isCreatingUser } = userCreate
    if(!newUser){
     return toast({title: "Connexion échouée, veuiller réessayer",})
    }
-   // const session = await signInAccount();
+  const session = await signInAccount({
+    email: values.email,
+    password: values.password,
+  });
+  if(!session){
+    return toast({title: "Connexion échouée, veuiller réessayer",})
   }
+}
 
   return (
     <Form {...form}>
