@@ -10,8 +10,7 @@ import { z } from "zod"
 import Loader from "@/components/ui/shared/Loader"
 import { Link, useNavigate } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
-import { useCreateUserAccountMutation } from "@/lib/api/auth/useCreateUserAccountMutation"
-import { useSignInAccount } from "@/lib/react-query/queriesAndMutations"
+import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations"
 import { useUserContext } from "@/context/AuthContext"
 
 
@@ -24,9 +23,9 @@ const SignupFom = () => {
   
 
 const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
- useCreateUserAccountMutation();
+ useCreateUserAccount();
 
- const { mutateAsync: signInAccount, isLoading: isSigningIn } =
+ const { mutateAsync: signInAccount, isPending: isSigningIn } =
  useSignInAccount(); 
 
   // 1. Define your form.
@@ -143,7 +142,7 @@ const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isCreatingUser ? (
+            {isCreatingAccount ? (
               <div className="flex-center gap-2">
                 <Loader /> Chargement...
               </div>
