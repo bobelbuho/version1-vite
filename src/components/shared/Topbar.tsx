@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Button } from "../button"
+import { Button } from "../ui/button"
 
 const Topbar = () => {
   return (
@@ -16,9 +16,7 @@ const Topbar = () => {
 
             <div className="flex gap-4">
             <Button variant="ghost" className="shad-button_ghost">
-                    <img src="/assets/icon/search.png" 
-                    width={24}
-                    height={24} />
+                    <img src="/assets/icon/search.png" width={24} height={24}/>
                 </Button>
 
                 <Button variant="ghost" className="shad-button_ghost">
@@ -28,7 +26,8 @@ const Topbar = () => {
                 </Button>
 
 
-                <Button variant="ghost" className="shad-button_ghost">
+                <Button variant="ghost" className="shad-button_ghost"
+                onClick={signOut}>
                     <img src="/assets/icon/profil.png" 
                     width={24}
                     height={24} />

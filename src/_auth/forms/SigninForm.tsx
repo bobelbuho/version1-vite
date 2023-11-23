@@ -34,7 +34,7 @@ const SigninForm = () => {
 
     if (!session) {
       toast({ title: "Login failed. Please try again." });
-      
+
       return;
     }
 
@@ -46,7 +46,7 @@ const SigninForm = () => {
       navigate("/");
     } else {
       toast({ title: "Login failed. Please try again.", });
-      
+
       return;
     }
   };
@@ -57,10 +57,10 @@ const SigninForm = () => {
         <img src="/assets/images/logo.svg" alt="logo" />
 
         <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
-        Connectez-vous à votre compte
+          Connectez-vous à votre compte
         </h2>
         <p className="text-light-3 small-medium md:base-regular mt-2">
-            Veuillez saisir vos informations
+          Veuillez saisir vos informations
         </p>
         <form
           onSubmit={form.handleSubmit(handleSignin)}
