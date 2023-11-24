@@ -33,8 +33,8 @@ const SigninForm = () => {
     const session = await signInAccount(user);
 
     if (!session) {
-      toast({ title: "Connexion echouée. Veuillez réessayez" });
-
+      toast({ title: "Erreur de connexion. Veuillez réessayer" });
+      
       return;
     }
 
@@ -45,12 +45,11 @@ const SigninForm = () => {
 
       navigate("/");
     } else {
-      toast({ title: "Connexion echouée. Veuillez réessayez", });
-
+      toast({ title: "Erreur de connexion. Veuillez réessayer.", });
+  
       return;
     }
   };
-
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
