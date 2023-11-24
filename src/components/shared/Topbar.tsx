@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom"
-import { Button } from "../ui/button"
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+import { useSignOutAccount } from "@/lib/react-query/queries";
+import { useUserContext } from "@/context/AuthContext";
 
 const Topbar = () => {
+    const { mutate: signOut, isSuccess } = useSignOutAccount();
+    const navigate = useNavigate();
+    const { user } = useUserContext();
+
+    useEffect(() => {
+        if(isSuccess) navigate(0);
+    }, [isSuccess]
+    );
+
   return (
     <section className='topbar'>
         <div className='flex between py-4 px-5'>
@@ -16,23 +28,29 @@ const Topbar = () => {
 
             <div className="flex gap-4">
             <Button variant="ghost" className="shad-button_ghost">
-                    <img src="/assets/icon/search.png" width={24} height={24}/>
+                    <img src="/assets/icon/search.png" width={24} height={24} alt="icon"/>
                 </Button>
 
                 <Button variant="ghost" className="shad-button_ghost">
-                    <img src="/assets/icon/post.png" 
+                    <img src="/assets/icon/post.png" alt="post"
                     width={24}
                     height={24} />
                 </Button>
 
 
                 <Button variant="ghost" className="shad-button_ghost"
-                onClick={signOut}>
-                    <img src="/assets/icon/profil.png" 
+                onClick={() => signOut()}>
+                    <img src="/assets/icon/profil.png" alt="profil"
                     width={24}
                     height={24} />
                 </Button>
-
+                <Link to={`/profile/${user.id}`} className="flex-center gap-3">
+                <img 
+                src={user.imageUrl || '/assets/images/profile-placeholder.svg'}
+                 alt="profile"
+                 className="h-8 w-8 rounded-full"
+                />
+                </Link>
             </div>
 
         </div>

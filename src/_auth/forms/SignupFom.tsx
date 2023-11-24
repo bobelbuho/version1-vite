@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation"
 import { z } from "zod"
-import Loader from "@/components/ui/shared/Loader"
+import Loader from "@/components/shared/Loader"
 import { Link, useNavigate } from "react-router-dom"
 import { useToast } from "@/components/ui/use-toast"
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations"
@@ -18,17 +18,10 @@ import { useUserContext } from "@/context/AuthContext"
 
 const SignupFom = () => {
   const { toast } = useToast();
-  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
   const navigate = useNavigate();
-  
-
-const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
- useCreateUserAccount();
-
- const { mutateAsync: signInAccount, isPending: isSigningIn } =
- useSignInAccount(); 
-
-  // 1. Define your form.
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
+ 
+  // Formulaire
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
     defaultValues: {
@@ -38,20 +31,31 @@ const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
       password: '',
       //passwordConfirm: '',
     },
-  })
+  });
+
+
+// Query
+
+const { mutateAsync: createUserAccount, isLoading: isCreatingAccount } = useCreateUserAccount();
+const { mutateAsync: signInAccount, isLoading: isSigningInUser } = useSignInAccount();
+
+
 
   // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof SignupValidation>) {
-    const newUser = await createUserAccount(values);
+  const handleSignup = async (user: z.infer<typeof SignupValidation>) => {
+    try {
+      const newUser = await createUserAccount(user);
    if(!newUser){
     return toast({title: "Connexion échouée, veuiller réessayer",})
    }
   const session = await signInAccount({
-    email: values.email,
-    password: values.password,
+    email: user.email,
+    password: user.password,
   });
   if(!session){
-    return toast({title: "Connexion échoué. Veuillez réessayer",})
+    toast({ title: "Connexion échoué. Veuillez réessayer",})
+    navigate('/sign-in');
+    return;
   }
   const isLoggedIn = await checkAuthUser();
   if(!isLoggedIn){
@@ -59,9 +63,12 @@ const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
 
     navigate('/');
   } else {
-    return toast({title: "Connexion échoué. Veuillez réessayer",})
+    toast({title: "Connexion échoué. Veuillez réessayer",});
+    return;}
+  } catch (error) {
+    console.log({ error });
   }
-}
+};
 
   return (
     <Form {...form}>
@@ -74,7 +81,7 @@ const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
 
 
 
-        <form onSubmit={form.handleSubmit(onSubmit)}
+        <form onSubmit={form.handleSubmit(handleSignup)}
           className=" flex flex-col gap-5 w-full mt-4">
           <FormField
             control={form.control}
@@ -142,7 +149,7 @@ const { mutateAsync: createUserAccount, isPending : isCreatingAccount } =
             )}
           />
           <Button type="submit" className="shad-button_primary">
-            {isCreatingAccount ? (
+            {isCreatingAccount || isSigningInUser || isUserLoading ? (
               <div className="flex-center gap-2">
                 <Loader /> Chargement...
               </div>
