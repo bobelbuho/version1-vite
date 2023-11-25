@@ -289,6 +289,7 @@ export async function updatePost(post: IUpdatePost) {
 
             image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
         }
+<<<<<<< HEAD
 
         // Convert tags into array
         const tags = post.tags?.replace(/ /g, "").split(",") || [];
@@ -544,3 +545,16 @@ export async function updateUser(user: IUpdateUser) {
         console.log(error);
     }
 }
+=======
+    }
+    
+    export async function signOutAccount() {
+
+        try {
+            const session = await account.deleteSession("current");
+            return session;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+>>>>>>> 44bae8c5de416d223ee1e9330b202ecd14451687
