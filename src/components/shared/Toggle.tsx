@@ -1,8 +1,7 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-
 import { INavLink } from "@/types";
 import { sidebarLinks } from "@/constants";
-//import { Loader } from "@/components/shared";
+import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSignOutAccount } from "@/lib/react-query/queries";
 import { useUserContext, INITIAL_USER } from "@/context/AuthContext";
@@ -25,7 +24,7 @@ const Toggle = () => {
   };
 
   return (
-    <nav className="leftsidebar">
+    <nav className="leftsidebar flex">
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
           <img
@@ -87,10 +86,10 @@ const Toggle = () => {
         className="shad-button_ghost"
         onClick={(e) => handleSignOut(e)}>
         <img src="/assets/icons/logout.svg" alt="logout" />
-        <p className="small-medium lg:base-medium">Logout</p>
+        <p className="small-medium lg:base-medium">Déconnexion</p>
       </Button>
     </nav>
   );
-}
+};
 
-export default Toggle
+export default Toggle;
