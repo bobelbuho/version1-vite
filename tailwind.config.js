@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 export const darkMode = ["class"];
 export const content = [
-  './pages/**/*.{ts,tsx}',
-  './components/**/*.{ts,tsx}',
-  './app/**/*.{ts,tsx}',
-  './src/**/*.{ts,tsx}',
+  './pages/**/*.{js,ts,jsx,tsx}',
+  './components/**/*.{js,ts,jsx,tsx}',
+  './app/**/*.{js,ts,jsx,tsx}',
+  './src/**/*.{js,ts,jsx,tsx}',
 ];
 export const theme = {
   container: {
@@ -15,6 +15,9 @@ export const theme = {
     },
   },
   extend: {
+    backgroundColor: {
+      'dark-1': '#1e1e1e',
+    },
     colors: {
       border: "hsl(var(--border))",
       input: "hsl(var(--input))",
