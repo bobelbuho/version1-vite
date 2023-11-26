@@ -18,7 +18,7 @@ import {
 import { PostValidation } from "@/lib/validation";
 import { useToast } from "@/components/ui/use-toast";
 import { useUserContext } from "@/context/AuthContext";
-import { FileUploader, Loader } from "@/components/shared";
+import { Loader } from "@/components/shared";
 import { useCreatePost, useUpdatePost } from "@/lib/react-query/queries";
 
 type PostFormProps = {
@@ -40,6 +40,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
     },
   });
 
+
+// l:mç
   // Query
   const { mutateAsync: createPost, isLoading: isLoadingCreate } =
     useCreatePost();
@@ -59,7 +61,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
       if (!updatedPost) {
         toast({
-          title: `${action} post failed. Please try again.`,
+          title: `${action} n'a pas fonctionné. Veuillez réessayer.`,
         });
       }
       return navigate(`/posts/${post.$id}`);
@@ -73,7 +75,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
     if (!newPost) {
       toast({
-        title: `${action} post failed. Please try again.`,
+        title: `${action} n'a pas fonctionné. Veuillez réessayer.`,
       });
     }
     navigate("/");
@@ -89,7 +91,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
           name="caption"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Caption</FormLabel>
+              <FormLabel className="shad-form_label">Ville de départ</FormLabel>
               <FormControl>
                 <Textarea
                   className="shad-textarea custom-scrollbar"
@@ -99,31 +101,66 @@ const PostForm = ({ post, action }: PostFormProps) => {
               <FormMessage className="shad-form_message" />
             </FormItem>
           )}
+        /> 
+        
+        <FormField
+           control={form.control}
+           name="caption"
+           render={({ field }) => (
+             <FormItem>
+               <FormLabel className="shad-form_label">Destination</FormLabel>
+               <FormControl>
+                 <Textarea
+                   className="shad-textarea custom-scrollbar"
+                   {...field}
+                 />
+               </FormControl>
+               <FormMessage className="shad-form_message" />
+               </FormItem>
+          )}
         />
 
-        <FormField
+<FormField
           control={form.control}
-          name="file"
+          name="caption"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Photos</FormLabel>
+              <FormLabel className="shad-form_label">Date de départ</FormLabel>
               <FormControl>
-                <FileUploader
-                  fieldChange={field.onChange}
-                  mediaUrl={post?.imageUrl}
+                <Textarea
+                  className="shad-textarea custom-scrollbar"
+                  {...field}
                 />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
           )}
-        />
+        /> 
+
+<FormField
+          control={form.control}
+          name="caption"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="shad-form_label">Date d'arriver</FormLabel>
+              <FormControl>
+                <Textarea
+                  className="shad-textarea custom-scrollbar"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage className="shad-form_message" />
+            </FormItem>
+          )}
+        /> 
 
         <FormField
+
           control={form.control}
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Location</FormLabel>
+              <FormLabel className="shad-form_label border-l-black">Numero de Vol</FormLabel>
               <FormControl>
                 <Input type="text" className="shad-input" {...field} />
               </FormControl>
@@ -132,26 +169,6 @@ const PostForm = ({ post, action }: PostFormProps) => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="tags"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="shad-form_label">
-                Add Tags (separated by comma " , ")
-              </FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Art, Expression, Learn"
-                  type="text"
-                  className="shad-input"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage className="shad-form_message" />
-            </FormItem>
-          )}
-        />
 
         <div className="flex gap-4 items-center justify-end">
           <Button

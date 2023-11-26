@@ -1,28 +1,28 @@
 export const sidebarLinks = [
+   // {
+      //imgURL: "/assets/icons/home.svg",
+     // route: "/",
+      //label: ".",
+   // },
     {
-      imgURL: "/assets/icons/home.svg",
-      route: "/",
-      label: "Home",
-    },
-    {
-      imgURL: "/assets/icons/wallpaper.svg",
+      imgURL: "/assets/icon/search.png",
       route: "/explore",
-      label: "Explore",
+      label: "Rechercher",
     },
+   // {
+      //imgURL: "/assets/icons/people.svg",
+    //  route: "/all-users",
+   //   label: ".",
+   // },
+  //  {
+      //imgURL: "/assets/icons/bookmark.svg",
+   //   route: "/saved",
+   //   label: ".",
+   // },
     {
-      imgURL: "/assets/icons/people.svg",
-      route: "/all-users",
-      label: "People",
-    },
-    {
-      imgURL: "/assets/icons/bookmark.svg",
-      route: "/saved",
-      label: "Saved",
-    },
-    {
-      imgURL: "/assets/icons/gallery-add.svg",
+      imgURL: "/assets/icon/post.png",
       route: "/create-post",
-      label: "Create Post",
+      label: "Publier un trajet",
     },
   ];
   
