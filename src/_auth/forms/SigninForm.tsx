@@ -83,7 +83,7 @@ const SigninForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="shad-form_label">Password</FormLabel>
+                <FormLabel className="shad-form_label">Mot De Passe</FormLabel>
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
@@ -98,7 +98,7 @@ const SigninForm = () => {
                 <Loader /> Chargement...
               </div>
             ) : (
-              "Log in"
+              "Se connecter"
             )}
           </Button>
 

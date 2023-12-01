@@ -102,7 +102,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             </FormItem>
           )}
         /> 
-        
+         
         <FormField
            control={form.control}
            name="caption"
@@ -175,14 +175,14 @@ const PostForm = ({ post, action }: PostFormProps) => {
             type="button"
             className="shad-button_dark_4"
             onClick={() => navigate(-1)}>
-            Cancel
+            Annuler
           </Button>
           <Button
             type="submit"
             className="shad-button_primary whitespace-nowrap"
             disabled={isLoadingCreate || isLoadingUpdate}>
             {(isLoadingCreate || isLoadingUpdate) && <Loader />}
-            {action} Post
+            Valider 
           </Button>
         </div>
       </form>
