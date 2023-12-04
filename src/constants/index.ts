@@ -14,18 +14,23 @@ export const sidebarLinks = [
     //  route: "/all-users",
    //   label: ".",
    // },
-  //  {
-      //imgURL: "/assets/icons/bookmark.svg",
-   //   route: "/saved",
-   //   label: ".",
-   // },
+  
     {
       imgURL: "/assets/icon/post.png",
       route: "/create-post",
       label: "Publier un trajet",
     },
+    
+    //profile icon
+     {
+      imgURL: "/assets/icon/profil.png",
+      route: "/saved",
+      label: ".",
+    },
   ];
   
+
+  //profile links
   export const bottombarLinks = [
     {
       imgURL: "/assets/icons/home.svg",

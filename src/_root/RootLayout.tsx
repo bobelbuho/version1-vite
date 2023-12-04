@@ -1,7 +1,9 @@
-import Bottombar from '@/components/shared/Bottombar'
-import Toggle from '@/components/shared/Toggle'
-import Topbar from '@/components/shared/Topbar'
 import { Outlet } from 'react-router-dom'
+
+import Bottombar from '@/components/shared/Bottombar'
+import Topbar from "@/components/shared/Topbar";
+import Toggle from '@/components/shared/Toggle'
+
 
 
 

@@ -18,7 +18,7 @@ import SigninForm from "@/_auth/forms/SigninForm";
 import { Toaster } from "@/components/ui/toaster";
 
 import "./globals.css";
-import Room from "./_root/pages/Room";
+
 
 const App = () => {
   return (
@@ -40,7 +40,6 @@ const App = () => {
           <Route path="/update-post/:id" element={<EditPost />} />
           <Route path="/posts/:id" element={<PostDetails />} />
           <Route path="/profile/:id/*" element={<Profile />} />
-          <Route path="/room" element={<Room />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
         </Route>
       </Routes>
